@@ -4,6 +4,7 @@ import br.senac.sp.security.tokens.domain.entity.Token;
 import br.senac.sp.security.tokens.domain.service.JwtService;
 import br.senac.sp.security.tokens.infrastructure.config.JwtProperties;
 import br.senac.sp.security.tokens.repository.UsuariosRepository;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -26,7 +27,7 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public Token generateToken(String subject) {
-        var claims = usuariosRepository.findScopesByUsuario(subject);
+        Map<String, List<String>> claims = usuariosRepository.findScopesByUsuario(subject);
         String jwt = Jwts.builder()
                 .claims(claims)
                 .subject(subject)
@@ -52,12 +53,12 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public List<String> getScopes(String key, String token) {
-        var claims = Jwts.parser()
+        Claims claims = Jwts.parser()
                 .setSigningKey(getSigningKey())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
-        var scopes = claims.get(key);
+        Object scopes = claims.get(key);
         if(Objects.isNull(scopes)){
             return List.of();
         }
