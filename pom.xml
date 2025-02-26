@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.senac.sp.security.tokens</groupId>
@@ -10,26 +10,54 @@
 	<name>security-tokens-jwt</name>
 	<description>Provides JWT tokens for authenticating and executing essential requests in my projects.</description>
 
-<!--	<parent>-->
-<!--		<groupId>org.springframework.boot</groupId>-->
-<!--		<artifactId>spring-boot-starter-parent</artifactId>-->
-<!--		<version>3.4.3</version>-->
-<!--		<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
-<!--	</parent>-->
+	<!--	<parent>-->
+	<!--		<groupId>org.springframework.boot</groupId>-->
+	<!--		<artifactId>spring-boot-starter-parent</artifactId>-->
+	<!--		<version>3.4.3</version>-->
+	<!--		<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+	<!--	</parent>-->
 
 	<properties>
 		<java.version>17</java.version>
 		<spring-boot-starter-security.version>3.4.3</spring-boot-starter-security.version>
+		<log4j-core.version>2.24.3</log4j-core.version>
+		<log4j-api.version>2.24.3</log4j-api.version>
 	</properties>
 
 	<dependencies>
 
-		<!-- Spring Boot Starter Security -->
+		<!-- Spring Web, Suporte a controladoresm, templates e Tomcat embutido-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-web</artifactId>-->
+		<!--			&lt;!&ndash; Removendo para utilizar a versao Log4J livre de vulnerabilidades &ndash;&gt;-->
+		<!--			<exclusions>-->
+		<!--				<exclusion>-->
+		<!--					<groupId>org.springframework.boot</groupId>-->
+		<!--					<artifactId>spring-boot-starter-logging</artifactId>-->
+		<!--				</exclusion>-->
+		<!--			</exclusions>-->
+		<!--		</dependency>-->
+
+		<!-- Log4J2 -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-			<version>${spring-boot-starter-security.version}</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j-core.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j-api.version}</version>
+		</dependency>
+
+		<!-- Vamos trabalhar com token, nao ha necessidade do Spring Boot Starter Security -->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+		<!--			<version>${spring-boot-starter-security.version}</version>-->
+		<!--		</dependency>-->
 
 		<!-- Spring Boot -->
 		<dependency>
@@ -38,18 +66,17 @@
 			<version>3.4.3</version>
 		</dependency>
 
-
 		<!-- Tests -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.security</groupId>-->
+		<!--			<artifactId>spring-security-test</artifactId>-->
+		<!--			<scope>test</scope>-->
+		<!--		</dependency>-->
 
 		<!-- JJWT for JWT handling -->
 		<dependency>
@@ -72,7 +99,6 @@
 
 	</dependencies>
 
-
 	<!-- Se quiser utilizar a gestão de dependências do Spring Boot sem herdar do parent:-->
 	<dependencyManagement>
 		<dependencies>
@@ -90,10 +116,10 @@
 	<!-- Não inclua o spring-boot-maven-plugin, pois não precisa empacotar um fat jar -->
 	<build>
 		<plugins>
-<!--			<plugin>-->
-<!--				<groupId>org.springframework.boot</groupId>-->
-<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--			</plugin>-->
+			<!--			<plugin>-->
+			<!--				<groupId>org.springframework.boot</groupId>-->
+			<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+			<!--			</plugin>-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
