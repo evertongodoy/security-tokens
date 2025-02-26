@@ -8,6 +8,6 @@ public interface JwtService {
 
     Token generateToken(String subject);
     boolean validateToken(String token);
-    List<String> getScopes(String key, String token);
+    List<String> getScopes(String token);
 
 }

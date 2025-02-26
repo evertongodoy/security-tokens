@@ -18,6 +18,7 @@ public class JwtServiceImpl implements JwtService {
 
     private final JwtProperties jwtProperties;
     private final UsuariosRepository usuariosRepository;
+    private static final String SCOPES = "scopes";
 
     public JwtServiceImpl(JwtProperties jwtProperties,
                           UsuariosRepository usuariosRepository) {
@@ -52,13 +53,13 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public List<String> getScopes(String key, String token) {
+    public List<String> getScopes(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(getSigningKey())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
-        Object scopes = claims.get(key);
+        Object scopes = claims.get(SCOPES);
         if(Objects.isNull(scopes)){
             return List.of();
         }

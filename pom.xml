@@ -27,17 +27,18 @@
 	<dependencies>
 
 		<!-- Spring Web, Suporte a controladoresm, templates e Tomcat embutido-->
-		<!--		<dependency>-->
-		<!--			<groupId>org.springframework.boot</groupId>-->
-		<!--			<artifactId>spring-boot-starter-web</artifactId>-->
-		<!--			&lt;!&ndash; Removendo para utilizar a versao Log4J livre de vulnerabilidades &ndash;&gt;-->
-		<!--			<exclusions>-->
-		<!--				<exclusion>-->
-		<!--					<groupId>org.springframework.boot</groupId>-->
-		<!--					<artifactId>spring-boot-starter-logging</artifactId>-->
-		<!--				</exclusion>-->
-		<!--			</exclusions>-->
-		<!--		</dependency>-->
+		<!-- Solucao para Cannot resolve symbol 'HandlerInterceptor' -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- Removendo para utilizar a versao Log4J livre de vulnerabilidades -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 		<!-- Log4J2 -->
 		<dependency>
